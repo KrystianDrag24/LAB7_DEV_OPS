@@ -1,0 +1,35 @@
+name: LAB7_417477_test
+
+on:
+  push:
+    branches:
+      - roboczy
+    
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.11'
+
+    - name: Install libs for testing
+      run: |
+        pip  install pytest 
+    
+    - name: prepare environemnt 
+      run: |
+         cd ./LAB7/env_417477 && python -m pip install -r requirements.txt
+      
+
+    - name: Run test
+      run: |
+        cd ./LAB7/env_417477 && pytest calculator_test.py
+
+
+
