@@ -17,12 +17,12 @@ jobs:
         with:
           python-version: '3.11'
       - name: Install dependencies
-        # Zmieniono: z LAB7/env_417477 na env_417477
         run: pip install -r requirements.txt
-        working-directory: env_417477 # <--- ZMIENIONO NA TO!
+        working-directory: env_417477
       - name: Run test_dodawanie
-        run: pytest test_dodawanie.py
-        working-directory: env_417477 # <--- ZMIENIONO NA TO!
+        # Uruchomienie tylko funkcji test_dodawanie z pliku calculator_test.py
+        run: pytest calculator_test.py::test_dodawanie # <--- ZMIENIONO!
+        working-directory: env_417477
 
   test_odejmowanie:
     runs-on: ubuntu-latest
@@ -35,10 +35,11 @@ jobs:
           python-version: '3.11'
       - name: Install dependencies
         run: pip install -r requirements.txt
-        working-directory: env_417477 # <--- ZMIENIONO NA TO!
+        working-directory: env_417477
       - name: Run test_odejmowanie
-        run: pytest test_odejmowanie.py
-        working-directory: env_417477 # <--- ZMIENIONO NA TO!
+        # Uruchomienie tylko funkcji test_odejmowanie z pliku calculator_test.py
+        run: pytest calculator_test.py::test_odejmowanie # <--- ZMIENIONO!
+        working-directory: env_417477
 
   test_mnozenie:
     runs-on: ubuntu-latest
@@ -51,10 +52,11 @@ jobs:
           python-version: '3.11'
       - name: Install dependencies
         run: pip install -r requirements.txt
-        working-directory: env_417477 # <--- ZMIENIONO NA TO!
+        working-directory: env_417477
       - name: Run test_mnozenie
-        run: pytest test_mnozenie.py
-        working-directory: env_417477 # <--- ZMIENIONO NA TO!
+        # Uruchomienie tylko funkcji test_mnozenie z pliku calculator_test.py
+        run: pytest calculator_test.py::test_mnozenie # <--- ZMIENIONO!
+        working-directory: env_417477
 
   test_dzielenie:
     runs-on: ubuntu-latest
@@ -67,12 +69,13 @@ jobs:
           python-version: '3.11'
       - name: Install dependencies
         run: pip install -r requirements.txt
-        working-directory: env_417477 # <--- ZMIENIONO NA TO!
+        working-directory: env_417477
       - name: Run test_dzielenie
-        run: pytest test_dzielenie.py
-        working-directory: env_417477 # <--- ZMIENIONO NA TO!
+        # Uruchomienie tylko funkcji test_dzielenie z pliku calculator_test.py
+        run: pytest calculator_test.py::test_dzielenie # <--- ZMIENIONO!
+        working-directory: env_417477
 
-  # Nowy job dla testów funkcji Pandas, uruchamiany po zakończeniu wszystkich poprzednich
+  # Job dla nowych testów (ten plik testowy pozostaje oddzielny)
   new_tests:
     runs-on: ubuntu-latest
     needs: [test_dodawanie, test_odejmowanie, test_mnozenie, test_dzielenie]
@@ -85,7 +88,7 @@ jobs:
           python-version: '3.11'
       - name: Install dependencies
         run: pip install -r requirements.txt
-        working-directory: env_417477 # <--- ZMIENIONO NA TO!
+        working-directory: env_417477
       - name: Run new pandas tests
         run: pytest test_pandas_funkcje.py
-        working-directory: env_417477 # <--- ZMIENIONO NA TO!
+        working-directory: env_417477
