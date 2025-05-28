@@ -22,14 +22,14 @@ jobs:
       run: |
         pip  install pytest 
     
-    - name: prepare environemnt 
+    - name: prepare environment 
       run: |
-         cd ./LAB7/env_417477 && python -m pip install -r requirements.txt
-      
+        cd env_417477 && python -m pip install -r requirements.txt
 
     - name: Run test
       run: |
-        cd ./LAB7/env_417477 && pytest calculator_test.py
+        cd env_417477 && pytest calculator_test.py
+
 
 
 
