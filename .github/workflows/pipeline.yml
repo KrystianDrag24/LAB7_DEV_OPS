@@ -4,32 +4,87 @@ on:
   push:
     branches:
       - roboczy
-    
+
 jobs:
-  build:
+  # Równoległe joby dla każdej z bazowych funkcji
+  test_dodawanie:
     runs-on: ubuntu-latest
-    
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v3 # Używaj nowszej wersji action
+      - name: Set up Python
+        uses: actions/setup-python@v4 # Używaj nowszej wersji action
+        with:
+          python-version: '3.11'
+      - name: Install dependencies
+        run: |
+          cd ./LAB7/env_417477 && pip install -r requirements.txt
+      - name: Run test_dodawanie
+        run: |
+          cd ./LAB7/env_417477 && pytest test_dodawanie.py
 
-    - name: Set up Python
-      uses: actions/setup-python@v2
-      with:
-        python-version: '3.11'
+  test_odejmowanie:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+      - name: Install dependencies
+        run: |
+          cd ./LAB7/env_417477 && pip install -r requirements.txt
+      - name: Run test_odejmowanie
+        run: |
+          cd ./LAB7/env_417477 && pytest test_odejmowanie.py
 
-    - name: Install libs for testing
-      run: |
-        pip  install pytest 
-    
-    - name: prepare environment 
-      run: |
-        cd env_417477 && python -m pip install -r requirements.txt
+  test_mnozenie:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+      - name: Install dependencies
+        run: |
+          cd ./LAB7/env_417477 && pip install -r requirements.txt
+      - name: Run test_mnozenie
+        run: |
+          cd ./LAB7/env_417477 && pytest test_mnozenie.py
 
-    - name: Run test
-      run: |
-        cd env_417477 && pytest calculator_test.py
+  test_dzielenie:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+      - name: Install dependencies
+        run: |
+          cd ./LAB7/env_417477 && pip install -r requirements.txt
+      - name: Run test_dzielenie
+        run: |
+          cd ./LAB7/env_417477 && pytest test_dzielenie.py
 
-
-
-
+  # Nowy job dla testów funkcji Pandas, uruchamiany po zakończeniu wszystkich poprzednich
+  new_tests:
+    runs-on: ubuntu-latest
+    needs: [test_dodawanie, test_odejmowanie, test_mnozenie, test_dzielenie] # Słowo klucz 'needs'
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+      - name: Install dependencies
+        run: |
+          cd ./LAB7/env_417477 && pip install -r requirements.txt
+      - name: Run new pandas tests
+        run: |
+          cd ./LAB7/env_417477 && pytest test_pandas_funkcje.py
