@@ -17,13 +17,12 @@ jobs:
         with:
           python-version: '3.11'
       - name: Install dependencies
-        # Użyj working-directory, aby określić katalog dla tej komendy
+        # Zmieniono: z LAB7/env_417477 na env_417477
         run: pip install -r requirements.txt
-        working-directory: ./LAB7/env_417477 # <--- DODANO TO
+        working-directory: env_417477 # <--- ZMIENIONO NA TO!
       - name: Run test_dodawanie
-        # Użyj working-directory, aby określić katalog dla tej komendy
         run: pytest test_dodawanie.py
-        working-directory: ./LAB7/env_417477 # <--- DODANO TO
+        working-directory: env_417477 # <--- ZMIENIONO NA TO!
 
   test_odejmowanie:
     runs-on: ubuntu-latest
@@ -36,10 +35,10 @@ jobs:
           python-version: '3.11'
       - name: Install dependencies
         run: pip install -r requirements.txt
-        working-directory: ./LAB7/env_417477 # <--- DODANO TO
+        working-directory: env_417477 # <--- ZMIENIONO NA TO!
       - name: Run test_odejmowanie
         run: pytest test_odejmowanie.py
-        working-directory: ./LAB7/env_417477 # <--- DODANO TO
+        working-directory: env_417477 # <--- ZMIENIONO NA TO!
 
   test_mnozenie:
     runs-on: ubuntu-latest
@@ -52,10 +51,10 @@ jobs:
           python-version: '3.11'
       - name: Install dependencies
         run: pip install -r requirements.txt
-        working-directory: ./LAB7/env_417477 # <--- DODANO TO
+        working-directory: env_417477 # <--- ZMIENIONO NA TO!
       - name: Run test_mnozenie
         run: pytest test_mnozenie.py
-        working-directory: ./LAB7/env_417477 # <--- DODANO TO
+        working-directory: env_417477 # <--- ZMIENIONO NA TO!
 
   test_dzielenie:
     runs-on: ubuntu-latest
@@ -68,10 +67,10 @@ jobs:
           python-version: '3.11'
       - name: Install dependencies
         run: pip install -r requirements.txt
-        working-directory: ./LAB7/env_417477 # <--- DODANO TO
+        working-directory: env_417477 # <--- ZMIENIONO NA TO!
       - name: Run test_dzielenie
         run: pytest test_dzielenie.py
-        working-directory: ./LAB7/env_417477 # <--- DODANO TO
+        working-directory: env_417477 # <--- ZMIENIONO NA TO!
 
   # Nowy job dla testów funkcji Pandas, uruchamiany po zakończeniu wszystkich poprzednich
   new_tests:
@@ -86,7 +85,7 @@ jobs:
           python-version: '3.11'
       - name: Install dependencies
         run: pip install -r requirements.txt
-        working-directory: ./LAB7/env_417477 # <--- DODANO TO
+        working-directory: env_417477 # <--- ZMIENIONO NA TO!
       - name: Run new pandas tests
         run: pytest test_pandas_funkcje.py
-        working-directory: ./LAB7/env_417477 # <--- DODANO TO
+        working-directory: env_417477 # <--- ZMIENIONO NA TO!
